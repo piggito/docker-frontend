@@ -2,9 +2,7 @@ FROM skilldlabs/frontend:latest
 
 MAINTAINER Andy Postnikov
 
-RUN apk add --no-cache git \
-  && npm install -g \
-  bower \
+ENV NPM_PACKAGES "bower \
   breakpoint-sass \
   browser-sync \
   chroma-sass \
@@ -12,6 +10,7 @@ RUN apk add --no-cache git \
   eslint \
   event-stream \
   gulp-autoprefixer \
+  gulp-cached \
   gulp-eslint \
   gulp-if \
   gulp-load-plugins \
@@ -23,9 +22,13 @@ RUN apk add --no-cache git \
   gulp.spritesmith \
   kss \
   node-sass-import-once \
+  glob \
   sass-lint \
   support-for \
   typey \
-  zen-grids
+  zen-grids"
+
+RUN apk add --no-cache git \
+  && npm install -g $NPM_PACKAGES
 
 COPY docker-entrypoint.sh /usr/bin/

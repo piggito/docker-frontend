@@ -6,8 +6,8 @@ ARG VCS_REF
 LABEL org.label-schema.build-date=$BUILD_DATE \
   org.label-schema.vcs-ref=$VCS_REF \
   org.label-schema.schema-version="1.0" \
-  org.label-schema.name="zen-frontend-env" \
-  org.label-schema.description="Zen theme for Drupal - npm, gulp, bower, susy & libsass" \
+  org.label-schema.name="skilld-d7" \
+  org.label-schema.description="Skilld base Drupal 7 frontend image - Alpine: npm, gulp, compass-importer, webpack3 & libsass" \
   org.label-schema.vcs-url="https://github.com/skilld-labs/docker-frontend" \
   maintainer="Andy Postnikov <andypost@ya.ru>"
 

@@ -6,8 +6,8 @@ ARG VCS_REF
 LABEL org.label-schema.build-date=$BUILD_DATE \
   org.label-schema.vcs-ref=$VCS_REF \
   org.label-schema.schema-version="1.0" \
-  org.label-schema.name="zen-frontend-env" \
-  org.label-schema.description="Zen theme for Drupal - npm, gulp, bower, susy & libsass" \
+  org.label-schema.name="skilld-zen" \
+  org.label-schema.description="Skilld latest Drupal 8 zen theme image - Alpine: node, npm, gulp, kss, bower, susy & libsass" \
   org.label-schema.vcs-url="https://github.com/skilld-labs/docker-frontend" \
   maintainer="Andy Postnikov <andypost@ya.ru>"
 
@@ -44,7 +44,6 @@ RUN set -e \
   && npm install -g \
     susy@2 \
     $NPM_PACKAGES \
-  && apk del --no-cache --purge git \
   && rm -rf /root/.npm /root/.config /tmp/npm*
 
 VOLUME /work

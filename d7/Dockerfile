@@ -1,7 +1,15 @@
 FROM mhart/alpine-node:7
 
-VOLUME /work
-WORKDIR /work
+ARG BUILD_DATE
+ARG VCS_REF
+
+LABEL org.label-schema.build-date=$BUILD_DATE \
+  org.label-schema.vcs-ref=$VCS_REF \
+  org.label-schema.schema-version="1.0" \
+  org.label-schema.name="zen-frontend-env" \
+  org.label-schema.description="Zen theme for Drupal - npm, gulp, bower, susy & libsass" \
+  org.label-schema.vcs-url="https://github.com/skilld-labs/docker-frontend" \
+  maintainer="Andy Postnikov <andypost@ya.ru>"
 
 ENV NPM_PACKAGES "node-sass \
   webpack-dev-server \
@@ -35,16 +43,18 @@ ENV NPM_PACKAGES "node-sass \
   yargs \
   node-sass-asset-functions"
 
-RUN apk add --no-cache git \
+RUN set -e \
+  && apk add --no-cache git \
   && npm --unsafe-perm install -g \
     LPGhatguy/node-sass-glob \
     webpack@3 susy@2 \
     $NPM_PACKAGES \
   && apk del --no-cache --purge git \
-  && mkdir /.cache /.config \
-  && chmod 777 /.cache /.config \
   && rm -rf /root/.npm /root/.config /tmp/npm*
 
-COPY docker-entrypoint.sh /usr/local/bin/
+VOLUME /work
+WORKDIR /work
+
+COPY docker-entrypoint.sh /usr/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["gulp"]

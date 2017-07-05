@@ -30,15 +30,19 @@ ENV NPM_PACKAGES "node-sass \
   sass-rem \
   sass-toolkit \
   script-loader \
-  susy \
   typey \
   yargs \
   node-sass-asset-functions"
 
-RUN apk add --no-cache make g++ git python && \
-    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community libsass && \
-    npm --unsafe-perm install -g webpack@1 LPGhatguy/node-sass-glob $NPM_PACKAGES && \
-     apk del --purge make g++ python git
+RUN apk add --no-cache git \
+  && npm --unsafe-perm install -g \
+    LPGhatguy/node-sass-glob \
+    webpack@3 susy@2 \
+    $NPM_PACKAGES \
+  && apk del --no-cache --purge git \
+  && mkdir /.cache /.config \
+  && chmod 777 /.cache /.config \
+  && rm -rf /root/.npm /root/.config /tmp/npm*
 
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]

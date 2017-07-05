@@ -3,6 +3,6 @@
 # prevent conflicts with existing
 rm -rf node_modules
 
-/usr/bin/npm link node-sass-glob webpack $NPM_PACKAGES
+/usr/bin/npm link --unsafe-perm node-sass-glob webpack susy $NPM_PACKAGES
 
 exec "$@"

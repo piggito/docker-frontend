@@ -22,6 +22,7 @@ ENV NPM_PACKAGES "node-sass \
   gulp-eslint \
   gulp-if \
   gulp-sass \
+  gulp-autoprefixer \
   gulp-sass-lint \
   gulp-sourcemaps \
   gulp-uglify \
